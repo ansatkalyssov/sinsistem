@@ -2,9 +2,21 @@
 {% block body_block %}
 <div class="container">
   <div class="jumbotron">
-    <h1>Welcome to the Djungle !</h1>
+    <form method="post" action="{% url 'teachers:create_question' %}">
+      {% csrf_token %}
     {% if user.is_authenticated %}
-        <h2>Hello {{ user.username }}</h2>
+    <h1>HOŞ GELDİNİZ {{ user.teacher.teacher}}!</h1>
+      <p>Eğitmenin adı ve soyadı: {{ user.teacher.first_name }} {{user.teacher.last_name}}</p>
+      <p>Eğitmenin ünvanı: {{ user.teacher.title }}</p>
+      <p>Eğitmen hakkında: {{ user.teacher.about }}</p>
+        <p>Eğitmenin dersleri: {% for lesson in lesson_list %}
+                                {% if user.teacher.id == lesson.prof.id %}
+                                {{ lesson.lesson_name }}
+                                {% endif %}
+                                {% endfor %}
+    </p>
+    <input type="submit" name="" class="btn btn-default" value="Soru Oluştur">
+    </form>
     {% else %}
         <h2>Register or Login if you'd like to</h2>
     {% endif %}

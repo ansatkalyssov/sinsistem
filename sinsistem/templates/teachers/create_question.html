@@ -1,0 +1,75 @@
+{% extends "teachers/base.html" %}
+
+{% block body_block %}
+  {% load static from staticfiles %}
+  <div class="container">
+    <div class="jumbotron">
+      {% if registered %}
+        <h1>Thank you for registering!</h1>
+      {% else %}
+        <h1>Soru Oluşturma Formu</h1>
+        <h3>Formu doldurunuz</h3>
+        <form enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+            <select class="form-control" id="lesson_name" name="selected_lesson">
+              {% for lsn in all_lessons %}
+              {% if lsn.prof.id == user.teacher.id %}
+                <option value="{{ lsn.id }}"selected="selected">{{ lsn.lesson_name }}</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+               <select class="form-control" id="subject_name" name="selected_lesson">
+              {% for sbj in all_subjects %}
+              {% if sbj.ders.id == 2 %}
+                <option value="{{ sbj.id }}"selected="selected">{{ sbj.subject_name }}</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+ <div id="fb-root"></div>
+  <div class="site-wrap container">
+    <div id="header_wrap" class="outer">
+
+    </div>
+    <!-- MAIN CONTENT -->
+    <div id="main-content-wrap" class="outer">
+
+      <br id="main_content" class="inner">
+          <label for="soru1">Soru1</label>
+      </br>
+             <input type="radio" name="sorutype" > cok secenek </input>
+                <input type="radio"  name="sorutype" > bosluk </input>
+          </br>
+       <input name="soru1" ></input>
+
+  </br>
+            <label for="soru1">cvpler</label>
+          </br>
+       <input name="cvp1" ></input>
+ <input name="cvp2" ></input>
+           <input name="cvp3" ></input>
+           <input name="cvp4" ></input>
+
+           </br>
+          <label for="soru1">dorgu cvp</label>
+             <input type="radio" name="1" > 1 </input>
+                <input type="radio"  name="2" > 2 </input>
+          </br>
+
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+
+  <script src="{% static 'assets/js/vendor.min96ad.js' %}"></script>
+  <script src="{% static 'assets/js/form-builder.min96ad.js' %}"></script>
+  <script src="{% static 'assets/js/form-render.min96ad.js' %}"></script>
+  <script src="{% static 'assets/js/site.min96ad.js' %}"></script>
+
+          <input type="submit" name="" value="Oluştur">
+        </form>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
